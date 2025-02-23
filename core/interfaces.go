@@ -3,8 +3,20 @@ package core
 //State and Context govern the general flow of the game.
 
 type GameState interface {
-	GetComponent(name string) interface{}
-	SetComponent(name string, value interface{})
+	// Component management
+	GetComponent(id string) (interface{}, error)        // Get a single component by ID
+	AddComponent(component interface{}) (string, error) // Add a new component, returns ID
+	RemoveComponent(id string) error                    // Remove a component by ID
+
+	// Collection management
+	CreateCollection(name string, componentType string) error             // Create a new empty collection
+	AddToCollection(collectionName string, componentID string) error      // Add component to collection
+	RemoveFromCollection(collectionName string, componentID string) error // Remove component from collection
+	GetCollection(collectionName string) ([]interface{}, error)           // Get all components in a collection
+
+	// State tracking
+	GetPlayerState(playerID string) (map[string]interface{}, error)        // Get player-specific state
+	UpdatePlayerState(playerID string, state map[string]interface{}) error // Update player state
 }
 
 //Actions are the individual moves that can be made, direct

@@ -1,8 +1,9 @@
 package events
 
 import (
-	"Tabulludo/core"
 	"sync"
+
+	"github.com/psychometry/tabulludo/core"
 )
 
 // EventBus implements core.EventBus
